@@ -3,7 +3,9 @@ from datetime import datetime
 
 st.set_page_config(page_title="Smart Flying Star Pro", page_icon="🧭", layout="centered")
 
-# --- ១. ក្បួនតក្កវិជ្ជាគណនាហុងស៊ុយ ---
+# ==========================================
+# ១. ក្បួនតក្កវិជ្ជាគណនាហុងស៊ុយ (២៤ ភ្នំ)
+# ==========================================
 SECTORS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
 SECTOR_NAMES = ['ជើង (N)', 'ជើងកើត (NE)', 'កើត (E)', 'ត្បូងកើត (SE)', 'ត្បូង (S)', 'ត្បូងលិច (SW)', 'លិច (W)', 'ជើងលិច (NW)']
 GUAS = [1, 8, 3, 4, 9, 2, 7, 6]
@@ -50,31 +52,31 @@ def calculate_flying_stars(period, degree):
         final_chart[pos] = {'m': m_chart[pos], 'w': w_chart[pos], 'b': base_chart[pos]}
     return final_chart, SECTOR_NAMES[facing_idx]
 
-
-# --- ២. ប្រព័ន្ធទិន្នន័យបកស្រាយយុគទី៩ (Period 9 Logic) ---
+# ==========================================
+# ២. ប្រព័ន្ធទិន្នន័យបកស្រាយយុគទី៩ (Period 9 Logic)
+# ==========================================
 period_9_single_star = {
     9: {"status": "Wang Qi (ចូលយុគ)", "desc": "ផ្កាយមហាសំណាងប្រចាំយុគទី៩ តំណាងឲ្យទ្រព្យសម្បត្តិ និងឱកាស។", "cure": "🔥 ដាស់ថាមពលដោយចលនាទឹក (សម្រាប់ Facing) ឬ ភ្នំ (សម្រាប់ Sitting)។"},
     1: {"status": "Sheng Qi (អនាគត)", "desc": "ផ្កាយអនាគតរុងរឿង ល្អសម្រាប់ការវិនិយោគ និងការសិក្សា។", "cure": "🌱 ប្រើរុក្ខជាតិ ឬទឹកផុសតូចៗ។"},
     2: {"status": "Tien Yi (អព្យាក្រឹត)", "desc": "ផ្កាយជំងឺចាប់ផ្តើមថយឥទ្ធិពល តែនៅត្រូវប្រុងប្រយ័ត្ន។", "cure": "🔔 ប្រើកណ្តឹងខ្យល់លោហៈ ៦បំពង់។"},
     3: {"status": "Dead Qi (ធ្លាក់យុគ)", "desc": "ផ្កាយជម្លោះ បណ្តឹង និងការយល់ច្រឡំ។", "cure": "🔴 ប្រើពណ៌ក្រហម ឬពន្លឺ។"},
     4: {"status": "Dead Qi (ធ្លាក់យុគ)", "desc": "ផ្កាយស្នេហាខុសក្បួន ឬបញ្ហាផ្លូវចិត្ត។", "cure": "🔥 ប្រើធាតុភ្លើង ដើម្បីដុតឈើ។"},
-    5: {"status": "Killing Qi (កាចសាហាវ)", "desc": "ផ្កាយគ្រោះថ្នាក់ បង្កជំងឺ និងឧបសគ្គធំ។ ដាច់ខាតត្រូវបន្សាប។", "cure": "🪙 ប្រើកាក់ស្ពាន់ ៦ ឬកណ្តឹងខ្យល់លោហៈ។"},
+    5: {"status": "Killing Qi (កាចសាហាវ)", "desc": "ផ្កាយគ្រោះថ្នាក់ បង្កជំងឺ និងឧបសគ្គធំ។ ដាច់ខាតត្រូវបន្សាប។", "cure": "🪙 ប្រើកាក់ស្ពាន់ ៦ ឬកណ្តឹងខ្យល់លោហៈ (ហាមធាតុភ្លើង/ចលនា)។"},
     6: {"status": "Killing Qi (ធ្លាក់យុគ)", "desc": "ផ្កាយអំណាចដែលធ្លាក់យុគ បង្កជាបញ្ហាច្បាប់។", "cure": "💧 ប្រើទឹកស្ងៀម (Yin Water)។"},
     7: {"status": "Killing Qi (ធ្លាក់យុគ)", "desc": "ផ្កាយចោរកម្ម ការបាត់បង់លុយកាក់ និងគ្រោះថ្នាក់។", "cure": "🌊 ប្រើទឹកដើម្បីលាងសម្អាត។"},
-    8: {"status": "Tui Qi (ថយយុគ)", "desc": "ផ្កាយអស់អំណាច មិនមែនជាផ្កាយនាំលុយធំទៀតទេ។", "cure": "⛰️ ប្រើថ្ម ឬរបស់ធ្ងន់ៗដើម្បីរក្សាលំនឹង។"}
+    8: {"status": "Tui Qi (ថយយុគ)", "desc": "ផ្កាយអស់អំណាច មិនមែនជាផ្កាយនាំលុយធំទៀតទេ។ រក្សាលំនឹង តែមិនត្រូវពឹងផ្អែក។", "cure": "⛰️ ប្រើថ្ម ឬរបស់ធ្ងន់ៗដើម្បីរក្សាលំនឹង។"}
 }
 
-# ប្រើប្រាស់រូបភាព (Images) ជំនួសឲ្យ Emoji ធម្មតា
 def get_cure_visual(m, w):
     combo = f"{m}-{w}"
-    # រូបភាពកម្រិត HD ពីប្រភព Icons8
-    img_wulou = "<img src='https://img.icons8.com/color/48/calabash.png' width='28' style='vertical-align: middle;'>"
-    img_fountain = "<img src='https://img.icons8.com/color/48/fountain.png' width='28' style='vertical-align: middle;'>"
-    img_mountain = "<img src='https://img.icons8.com/color/48/mountain.png' width='28' style='vertical-align: middle;'>"
-    img_bamboo = "<img src='https://img.icons8.com/color/48/bamboo.png' width='28' style='vertical-align: middle;'>"
-    img_pottery = "<img src='https://img.icons8.com/color/48/pottery.png' width='28' style='vertical-align: middle;'>"
-    img_yin_yang = "<img src='https://img.icons8.com/color/48/yin-yang.png' width='28' style='vertical-align: middle;'>"
-    img_water = "<img src='https://img.icons8.com/color/48/water.png' width='28' style='vertical-align: middle;'>"
+    # រូបភាពកម្រិត HD ពី Icons8 ជំនួស Emoji
+    img_wulou = "<img src='https://img.icons8.com/color/48/calabash.png' width='24' style='vertical-align: middle;'>"
+    img_fountain = "<img src='https://img.icons8.com/color/48/fountain.png' width='24' style='vertical-align: middle;'>"
+    img_mountain = "<img src='https://img.icons8.com/color/48/mountain.png' width='24' style='vertical-align: middle;'>"
+    img_bamboo = "<img src='https://img.icons8.com/color/48/bamboo.png' width='24' style='vertical-align: middle;'>"
+    img_pottery = "<img src='https://img.icons8.com/color/48/pottery.png' width='24' style='vertical-align: middle;'>"
+    img_yin_yang = "<img src='https://img.icons8.com/color/48/yin-yang.png' width='24' style='vertical-align: middle;'>"
+    img_water = "<img src='https://img.icons8.com/color/48/water.png' width='24' style='vertical-align: middle;'>"
 
     if m == 5 or w == 5 or m == 2 or w == 2:
         return img_wulou, "ឃ្លោកស្ពាន់/លោហៈ", "#c0392b"
@@ -107,8 +109,9 @@ def get_interpretation(m, w):
     if combo in interpretations_p9: return interpretations_p9[combo]
     return "💡 **ថាមពលចម្រុះ:** ផ្កាយទឹក(ស្តាំ) តំណាងឲ្យលាភ ផ្កាយភ្នំ(ឆ្វេង) តំណាងឲ្យសុខភាព។ ត្រួតពិនិត្យផ្កាយនីមួយៗតាមច្បាប់យុគទី៩។"
 
-
-# --- ៣. ចំណុចប្រទាក់អ្នកប្រើប្រាស់ (UI) ---
+# ==========================================
+# ៣. ចំណុចប្រទាក់អ្នកប្រើប្រាស់ (UI)
+# ==========================================
 st.markdown("<h2 style='text-align: center; color: #d35400;'>🧭 Smart Flying Star Pro</h2>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #7f8c8d; font-size: 14px;'>គណនា ២៤ ភ្នំ និងវិភាគកម្រិតខ្ពស់តាមយុគទី៩ (Period 9)</p>", unsafe_allow_html=True)
 st.divider()
@@ -122,36 +125,27 @@ if st.button("🔮 គណនាទិសហុងស៊ុយ", use_container_wi
     final_chart, facing_name = calculate_flying_stars(period_input, degree_input)
     st.success(f"🏠 **ប្លង់ដើម: ផ្ទះយុគទី {period_input}** | បែរមុខទៅទិស **{facing_name} ({degree_input} ដឺក្រេ)**")
     
-    # គូរតារាង Grid ជា CSS Grid ជាប់គ្នា ១០០%
     st.markdown("### 🗺️ តារាងផ្កាយហោះ (Flying Star Chart)")
     
     order = ['SE', 'S', 'SW', 'E', 'C', 'W', 'NE', 'N', 'NW']
     
-    grid_html = """
-    <div style='display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; border: 3px solid #2c3e50; background-color: #ecf0f1; gap: 0;'>
-    """
+    # សរសេរកូដ HTML ជាបន្ទាត់តែមួយ (Single-line concatenation) ដើម្បីការពារកុំឲ្យ Streamlit Render ចេញជា Text ឆៅ
+    grid_html = "<div style='display: grid; grid-template-columns: repeat(3, 1fr); max-width: 650px; margin: 0 auto; border: 3px solid #2c3e50; background-color: #ecf0f1; gap: 0;'>"
     
     for pos in order:
         data = final_chart[pos]
         icon, text, color = get_cure_visual(data['m'], data['w'])
         
-        # ប្រើប្រាស់ border ដើម្បីឲ្យប្រអប់នីមួយៗជាប់គ្នាបង្កើតជាក្រឡាអុក (Grid Layout គ្មានចន្លោះ)
-        grid_html += f"""
-        <div style='border: 1px solid #95a5a6; position: relative; height: 140px; background-color: #ffffff; padding: 5px;'>
-            <div style='position: absolute; top: 5px; left: 8px; color: #7f8c8d; font-weight: bold; font-size: 11px;'>{NAMES_DICT[pos]}</div>
-            <div style='position: absolute; top: 25px; left: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['m']}</div>
-            <div style='position: absolute; top: 25px; right: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['w']}</div>
-            <div style='position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); color: #e74c3c; font-weight: bold; font-size: 26px;'>{data['b']}</div>
-            <div style='position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; border-top: 1px dashed #ecf0f1; padding-top: 4px;'>
-                {icon} <span style='font-size: 11px; font-weight: bold; color: {color}; margin-left: 5px;'>{text}</span>
-            </div>
-        </div>
-        """
+        grid_html += f"<div style='border: 1px solid #95a5a6; position: relative; height: 130px; background-color: #ffffff; padding: 5px;'><div style='position: absolute; top: 5px; left: 8px; color: #7f8c8d; font-weight: bold; font-size: 11px;'>{NAMES_DICT[pos]}</div><div style='position: absolute; top: 25px; left: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['m']}</div><div style='position: absolute; top: 25px; right: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['w']}</div><div style='position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); color: #e74c3c; font-weight: bold; font-size: 26px;'>{data['b']}</div><div style='position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; border-top: 1px dashed #ecf0f1; padding-top: 4px;'>{icon} <span style='font-size: 11px; font-weight: bold; color: {color}; margin-left: 5px;'>{text}</span></div></div>"
         
     grid_html += "</div>"
+    
+    # បញ្ជាឲ្យបង្ហាញតារាង
     st.markdown(grid_html, unsafe_allow_html=True)
     
-    # --- ផ្នែកវិភាគទ្វារធំឆ្លាតវៃ (Smart Main Door Analysis) ---
+    # ==========================================
+    # ៤. ការវិភាគទ្វារធំឆ្លាតវៃ (Smart Main Door Analysis)
+    # ==========================================
     st.markdown("---")
     st.markdown("### 🚪 ការវិភាគទ្វារធំ (The 3 Factors: Main Door)")
     
@@ -171,7 +165,9 @@ if st.button("🔮 គណនាទិសហុងស៊ុយ", use_container_wi
         
     st.write(f"👉 **វិធីរៀបចំ:** {door_interp['cure']}")
 
-    # --- ផ្នែកវិភាគលម្អិតតាមបន្ទប់ ---
+    # ==========================================
+    # ៥. ផ្នែកវិភាគលម្អិតតាមបន្ទប់ (Detailed Room Analysis)
+    # ==========================================
     st.markdown("---")
     st.markdown("### 📊 លទ្ធផលវិភាគផ្កាយលម្អិតតាមទិស (Period 9 Cures)")
     
