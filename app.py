@@ -53,7 +53,7 @@ def calculate_flying_stars(period, degree):
     return final_chart, SECTOR_NAMES[facing_idx]
 
 # ==========================================
-# ២. ប្រព័ន្ធទិន្នន័យបកស្រាយយុគទី៩ (Period 9 Logic)
+# ២. ប្រព័ន្ធទិន្នន័យបកស្រាយ និង គំនូរ SVG (Inline Graphics)
 # ==========================================
 period_9_single_star = {
     9: {"status": "Wang Qi (ចូលយុគ)", "desc": "ផ្កាយមហាសំណាងប្រចាំយុគទី៩ តំណាងឲ្យទ្រព្យសម្បត្តិ និងឱកាស។", "cure": "🔥 ដាស់ថាមពលដោយចលនាទឹក (សម្រាប់ Facing) ឬ ភ្នំ (សម្រាប់ Sitting)។"},
@@ -69,29 +69,29 @@ period_9_single_star = {
 
 def get_cure_visual(m, w):
     combo = f"{m}-{w}"
-    # រូបភាពកម្រិត HD ពី Icons8 ជំនួស Emoji
-    img_wulou = "<img src='https://img.icons8.com/color/48/calabash.png' width='24' style='vertical-align: middle;'>"
-    img_fountain = "<img src='https://img.icons8.com/color/48/fountain.png' width='24' style='vertical-align: middle;'>"
-    img_mountain = "<img src='https://img.icons8.com/color/48/mountain.png' width='24' style='vertical-align: middle;'>"
-    img_bamboo = "<img src='https://img.icons8.com/color/48/bamboo.png' width='24' style='vertical-align: middle;'>"
-    img_pottery = "<img src='https://img.icons8.com/color/48/pottery.png' width='24' style='vertical-align: middle;'>"
-    img_yin_yang = "<img src='https://img.icons8.com/color/48/yin-yang.png' width='24' style='vertical-align: middle;'>"
-    img_water = "<img src='https://img.icons8.com/color/48/water.png' width='24' style='vertical-align: middle;'>"
+    
+    # គំនូរ SVG បង្កប់ក្នុងកូដ ធានាមិនបាត់រូបភាព ១០០%
+    svg_wulou = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><circle cx='50' cy='35' r='20' fill='#F5B041'/><circle cx='50' cy='70' r='28' fill='#F5B041'/><path d='M 45 15 C 45 5, 55 5, 55 15' stroke='#E67E22' stroke-width='4' fill='none'/></svg>"
+    svg_water = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><path d='M50 10 C 20 40, 20 70, 50 90 C 80 70, 80 40, 50 10' fill='#3498DB'/><path d='M50 30 C 35 50, 35 70, 50 85 C 65 70, 65 50, 50 30' fill='#85C1E9'/></svg>"
+    svg_mountain = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><polygon points='10,90 50,20 90,90' fill='#7F8C8D'/><polygon points='40,90 70,40 100,90' fill='#95A5A6'/></svg>"
+    svg_bamboo = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><rect x='35' y='10' width='12' height='80' rx='3' fill='#2ECC71'/><rect x='55' y='20' width='12' height='70' rx='3' fill='#27AE60'/><line x1='32' y1='35' x2='49' y2='35' stroke='#229954' stroke-width='3'/><line x1='32' y1='65' x2='49' y2='65' stroke='#229954' stroke-width='3'/><line x1='52' y1='50' x2='69' y2='50' stroke='#1E8449' stroke-width='3'/></svg>"
+    svg_pottery = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><path d='M 30 30 C 0 60, 20 90, 50 90 C 80 90, 100 60, 70 30 Z' fill='#D35400'/><rect x='40' y='10' width='20' height='20' fill='#E67E22'/><ellipse cx='50' cy='10' rx='10' ry='5' fill='#BA4A00'/></svg>"
+    svg_yinyang = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><circle cx='50' cy='50' r='45' fill='#FFF' stroke='#2C3E50' stroke-width='3'/><path d='M 50 5 A 45 45 0 0 0 50 95 A 22.5 22.5 0 0 0 50 50 A 22.5 22.5 0 0 1 50 5' fill='#2C3E50'/><circle cx='50' cy='27.5' r='6' fill='#FFF'/><circle cx='50' cy='72.5' r='6' fill='#2C3E50'/></svg>"
 
     if m == 5 or w == 5 or m == 2 or w == 2:
-        return img_wulou, "ឃ្លោកស្ពាន់/លោហៈ", "#c0392b"
+        return svg_wulou, "ឃ្លោកស្ពាន់/លោហៈ", "#c0392b"
     elif w == 9 or m == 9: 
-        return img_fountain, "ដាស់ថាមពលយុគ៩", "#e74c3c"
+        return svg_water, "ដាស់ថាមពលយុគ៩", "#e74c3c"
     elif m == 8 and w == 8:
-        return img_mountain, "រក្សាភាពស្ងៀមស្ងាត់", "#7f8c8d" 
+        return svg_mountain, "រក្សាភាពស្ងៀមស្ងាត់", "#7f8c8d" 
     elif combo in ["1-6", "6-1"]:
-        return img_bamboo, "លោហៈ ឬ រុក្ខជាតិ", "#2980b9"
+        return svg_bamboo, "លោហៈ ឬ រុក្ខជាតិ", "#2980b9"
     elif combo in ["9-7", "7-9"]:
-        return img_pottery, "វត្ថុដីឥដ្ឋ/គ្រីស្តាល់", "#d35400"
+        return svg_pottery, "វត្ថុដីឥដ្ឋ/គ្រីស្តាល់", "#d35400"
     elif w in [1]:
-        return img_water, "ចលនាទឹក (Water)", "#27ae60"
+        return svg_water, "ចលនាទឹក (Water)", "#27ae60"
     else:
-        return img_yin_yang, "រក្សាភាពស្ងប់ស្ងាត់", "#7f8c8d"
+        return svg_yinyang, "រក្សាភាពស្ងប់ស្ងាត់", "#7f8c8d"
 
 interpretations_p9 = {
     "9-9": "🌟 **មហាសំណាងទ្វេដងប្រចាំយុគ (Double 9):** ជាទីតាំងល្អឥតខ្ចោះបំផុតប្រចាំយុគទី៩។\n*   ✅ **វិធីជំរុញលាភ:** ដាក់អាងទឹកផុស ដើម្បីដាស់ផ្កាយលាភមុខផ្ទះ និងប្រើវត្ថុធាតុភ្លើង/ដី ដើម្បីគាំទ្រផ្កាយភ្នំ។",
@@ -129,18 +129,17 @@ if st.button("🔮 គណនាទិសហុងស៊ុយ", use_container_wi
     
     order = ['SE', 'S', 'SW', 'E', 'C', 'W', 'NE', 'N', 'NW']
     
-    # សរសេរកូដ HTML ជាបន្ទាត់តែមួយ (Single-line concatenation) ដើម្បីការពារកុំឲ្យ Streamlit Render ចេញជា Text ឆៅ
-    grid_html = "<div style='display: grid; grid-template-columns: repeat(3, 1fr); max-width: 650px; margin: 0 auto; border: 3px solid #2c3e50; background-color: #ecf0f1; gap: 0;'>"
+    # វិធីសាស្ត្រគូរតារាងថ្មី: ប្រើ Background Color ជាបន្ទាត់ ធានាភាពស្មើគ្នាឥតខ្ចោះ
+    grid_html = "<div style='display: grid; grid-template-columns: repeat(3, 1fr); max-width: 650px; margin: 0 auto; border: 3px solid #2c3e50; background-color: #bdc3c7; gap: 1px;'>"
     
     for pos in order:
         data = final_chart[pos]
         icon, text, color = get_cure_visual(data['m'], data['w'])
         
-        grid_html += f"<div style='border: 1px solid #95a5a6; position: relative; height: 130px; background-color: #ffffff; padding: 5px;'><div style='position: absolute; top: 5px; left: 8px; color: #7f8c8d; font-weight: bold; font-size: 11px;'>{NAMES_DICT[pos]}</div><div style='position: absolute; top: 25px; left: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['m']}</div><div style='position: absolute; top: 25px; right: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['w']}</div><div style='position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); color: #e74c3c; font-weight: bold; font-size: 26px;'>{data['b']}</div><div style='position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; border-top: 1px dashed #ecf0f1; padding-top: 4px;'>{icon} <span style='font-size: 11px; font-weight: bold; color: {color}; margin-left: 5px;'>{text}</span></div></div>"
+        # សរសេរកូដជាបន្ទាត់តែមួយ (Single Line) ដើម្បីការពារ Streamlit Render Error
+        grid_html += f"<div style='position: relative; height: 130px; background-color: #fcfcfc; padding: 5px;'><div style='position: absolute; top: 5px; left: 8px; color: #7f8c8d; font-weight: bold; font-size: 11px;'>{NAMES_DICT[pos]}</div><div style='position: absolute; top: 25px; left: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['m']}</div><div style='position: absolute; top: 25px; right: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['w']}</div><div style='position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); color: #e74c3c; font-weight: bold; font-size: 26px;'>{data['b']}</div><div style='position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; border-top: 1px dashed #ecf0f1; padding-top: 4px;'>{icon} <span style='font-size: 11px; font-weight: bold; color: {color}; margin-left: 5px;'>{text}</span></div></div>"
         
     grid_html += "</div>"
-    
-    # បញ្ជាឲ្យបង្ហាញតារាង
     st.markdown(grid_html, unsafe_allow_html=True)
     
     # ==========================================
