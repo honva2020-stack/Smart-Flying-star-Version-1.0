@@ -70,26 +70,44 @@ period_9_single_star = {
 def get_cure_visual(m, w):
     combo = f"{m}-{w}"
     
-    # គំនូរ SVG បង្កប់ក្នុងកូដ ធានាមិនបាត់រូបភាព ១០០%
+    # SVG Graphics HD
     svg_wulou = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><circle cx='50' cy='35' r='20' fill='#F5B041'/><circle cx='50' cy='70' r='28' fill='#F5B041'/><path d='M 45 15 C 45 5, 55 5, 55 15' stroke='#E67E22' stroke-width='4' fill='none'/></svg>"
     svg_water = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><path d='M50 10 C 20 40, 20 70, 50 90 C 80 70, 80 40, 50 10' fill='#3498DB'/><path d='M50 30 C 35 50, 35 70, 50 85 C 65 70, 65 50, 50 30' fill='#85C1E9'/></svg>"
-    svg_mountain = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><polygon points='10,90 50,20 90,90' fill='#7F8C8D'/><polygon points='40,90 70,40 100,90' fill='#95A5A6'/></svg>"
+    svg_mountain = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><polygon points='10,90 50,20 90,90' fill='#7F8C8D'/><polygon points='40,90 70,40 100,90' fill='#BDC3C7'/></svg>"
     svg_bamboo = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><rect x='35' y='10' width='12' height='80' rx='3' fill='#2ECC71'/><rect x='55' y='20' width='12' height='70' rx='3' fill='#27AE60'/><line x1='32' y1='35' x2='49' y2='35' stroke='#229954' stroke-width='3'/><line x1='32' y1='65' x2='49' y2='65' stroke='#229954' stroke-width='3'/><line x1='52' y1='50' x2='69' y2='50' stroke='#1E8449' stroke-width='3'/></svg>"
     svg_pottery = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><path d='M 30 30 C 0 60, 20 90, 50 90 C 80 90, 100 60, 70 30 Z' fill='#D35400'/><rect x='40' y='10' width='20' height='20' fill='#E67E22'/><ellipse cx='50' cy='10' rx='10' ry='5' fill='#BA4A00'/></svg>"
     svg_yinyang = "<svg width='28' height='28' viewBox='0 0 100 100' style='vertical-align: middle;'><circle cx='50' cy='50' r='45' fill='#FFF' stroke='#2C3E50' stroke-width='3'/><path d='M 50 5 A 45 45 0 0 0 50 95 A 22.5 22.5 0 0 0 50 50 A 22.5 22.5 0 0 1 50 5' fill='#2C3E50'/><circle cx='50' cy='27.5' r='6' fill='#FFF'/><circle cx='50' cy='72.5' r='6' fill='#2C3E50'/></svg>"
 
+    # តក្កវិជ្ជាកម្រិតអាតូម (Atomic Logic) សម្រាប់ Period 9 ដែលបានកែតម្រូវ
+    # ជំហានទី 1: សុវត្ថិភាពជាចម្បង (Safety First) - បន្សាបផ្កាយ ៥ និង ២
     if m == 5 or w == 5 or m == 2 or w == 2:
         return svg_wulou, "ឃ្លោកស្ពាន់/លោហៈ", "#c0392b"
-    elif w == 9 or m == 9: 
-        return svg_water, "ដាស់ថាមពលយុគ៩", "#e74c3c"
-    elif m == 8 and w == 8:
-        return svg_mountain, "រក្សាភាពស្ងៀមស្ងាត់", "#7f8c8d" 
-    elif combo in ["1-6", "6-1"]:
-        return svg_bamboo, "លោហៈ ឬ រុក្ខជាតិ", "#2980b9"
+        
+    # ជំហានទី 2: គូផ្កាយពិសេស (Special Combos)
     elif combo in ["9-7", "7-9"]:
         return svg_pottery, "វត្ថុដីឥដ្ឋ/គ្រីស្តាល់", "#d35400"
-    elif w in [1]:
+    elif combo in ["1-6", "6-1"]:
+        return svg_bamboo, "លោហៈ ឬ រុក្ខជាតិ", "#2980b9"
+        
+    # ជំហានទី 3: ដាស់ផ្កាយមហាសំណាងយុគ ៩ (Wang Qi) ឲ្យត្រូវក្បួន
+    elif w == 9 and m == 9:
+        return svg_water, "ទឹកផុស (ទាញលាភយុគ៩)", "#e74c3c"
+    elif w == 9: # ផ្កាយទឹក ៩ (ទាញលុយ)
+        return svg_water, "ចលនាទឹក (Water)", "#e74c3c"
+    elif m == 9: # ផ្កាយភ្នំ ៩ (ការពារសុខភាព) - ហាមប្រើទឹក!
+        return svg_mountain, "វត្ថុថ្ម/ភ្នំ (Mountain)", "#e74c3c"
+        
+    # ជំហានទី 4: ដាស់ផ្កាយអនាគតយុគ ៩ (Sheng Qi #1)
+    elif w == 1:
         return svg_water, "ចលនាទឹក (Water)", "#27ae60"
+    elif m == 1:
+        return svg_mountain, "វត្ថុថ្ម/ភ្នំ (Mountain)", "#27ae60"
+        
+    # ជំហានទី 5: ផ្កាយថយយុគ ៨ (Retreating Qi)
+    elif m == 8 and w == 8:
+        return svg_mountain, "រក្សាភាពស្ងៀមស្ងាត់", "#7f8c8d" 
+        
+    # ជំហានទី 6: ទូទៅ
     else:
         return svg_yinyang, "រក្សាភាពស្ងប់ស្ងាត់", "#7f8c8d"
 
@@ -129,14 +147,12 @@ if st.button("🔮 គណនាទិសហុងស៊ុយ", use_container_wi
     
     order = ['SE', 'S', 'SW', 'E', 'C', 'W', 'NE', 'N', 'NW']
     
-    # វិធីសាស្ត្រគូរតារាងថ្មី: ប្រើ Background Color ជាបន្ទាត់ ធានាភាពស្មើគ្នាឥតខ្ចោះ
     grid_html = "<div style='display: grid; grid-template-columns: repeat(3, 1fr); max-width: 650px; margin: 0 auto; border: 3px solid #2c3e50; background-color: #bdc3c7; gap: 1px;'>"
     
     for pos in order:
         data = final_chart[pos]
         icon, text, color = get_cure_visual(data['m'], data['w'])
         
-        # សរសេរកូដជាបន្ទាត់តែមួយ (Single Line) ដើម្បីការពារ Streamlit Render Error
         grid_html += f"<div style='position: relative; height: 130px; background-color: #fcfcfc; padding: 5px;'><div style='position: absolute; top: 5px; left: 8px; color: #7f8c8d; font-weight: bold; font-size: 11px;'>{NAMES_DICT[pos]}</div><div style='position: absolute; top: 25px; left: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['m']}</div><div style='position: absolute; top: 25px; right: 15px; color: #000000; font-weight: bold; font-size: 22px;'>{data['w']}</div><div style='position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); color: #e74c3c; font-weight: bold; font-size: 26px;'>{data['b']}</div><div style='position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; border-top: 1px dashed #ecf0f1; padding-top: 4px;'>{icon} <span style='font-size: 11px; font-weight: bold; color: {color}; margin-left: 5px;'>{text}</span></div></div>"
         
     grid_html += "</div>"
